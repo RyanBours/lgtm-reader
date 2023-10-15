@@ -17,6 +17,16 @@ tauri = { version = "1.5", features = ["shell-open"] }
 serde = { version = "1.0", features = ["derive"] }
 serde_json = "1.0"
 tauri-plugin-window-state = { git = "https://github.com/tauri-apps/plugins-workspace", branch = "v1" }
+tauri-plugin-fs-watch = { git = "https://github.com/tauri-apps/plugins-workspace", branch = "v1" }
+tauri-plugin-fs-extra = { git = "https://github.com/tauri-apps/plugins-workspace", branch = "v1" }
+
+# archive
+zip = { version = "0.6.6", features = [
+  "aes-crypto",
+  "bzip2",
+  "deflate",
+], optional = true, default-features = false }
+tar = { version = "0.4.39", optional = true }
 
 [features]
 # this feature is used for production builds or when `devPath` points to the filesystem
