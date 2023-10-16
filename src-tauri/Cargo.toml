@@ -13,20 +13,29 @@ edition = "2021"
 tauri-build = { version = "1.5", features = [] }
 
 [dependencies]
-tauri = { version = "1.5", features = ["shell-open"] }
-serde = { version = "1.0", features = ["derive"] }
-serde_json = "1.0"
+tauri = { version = "1.5.2", features = [
+    "fs-read-dir",
+    "fs-read-file",
+    "fs-write-file",
+    "fs-remove-file",
+    "fs-remove-dir",
+    "fs-exists",
+    "shell-open",
+] }
+serde = { version = "1.0.189", features = ["derive"] }
+serde_yaml = "0.9.25"
+serde_json = "1.0.107"
 tauri-plugin-window-state = { git = "https://github.com/tauri-apps/plugins-workspace", branch = "v1" }
 tauri-plugin-fs-watch = { git = "https://github.com/tauri-apps/plugins-workspace", branch = "v1" }
 tauri-plugin-fs-extra = { git = "https://github.com/tauri-apps/plugins-workspace", branch = "v1" }
 
 # archive
-zip = { version = "0.6.6", features = [
-  "aes-crypto",
-  "bzip2",
-  "deflate",
-], optional = true, default-features = false }
-tar = { version = "0.4.39", optional = true }
+zip = { version = "0.6.6", default-features = true }
+tar = { version = "0.4.40" }
+
+base64 = { version = "0.21.4" }
+regex = { version = "1.10.2" }
+
 
 [features]
 # this feature is used for production builds or when `devPath` points to the filesystem

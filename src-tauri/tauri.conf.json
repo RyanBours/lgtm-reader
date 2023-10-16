@@ -13,6 +13,17 @@
   "tauri": {
     "allowlist": {
       "all": false,
+      "fs": {
+        "readFile": true,
+        "writeFile": true,
+        "readDir": true,
+        "removeDir": true,
+        "removeFile": true,
+        "exists": true,
+        "scope": [
+          "library"
+        ]
+      },
       "shell": {
         "all": false,
         "open": true
@@ -20,8 +31,10 @@
     },
     "bundle": {
       "active": true,
-      "targets": "all",
-      "identifier": "com.tauri.dev",
+      "targets": [
+        "msi"
+      ],
+      "identifier": "moe.ryanis.reader",
       "icon": [
         "icons/32x32.png",
         "icons/128x128.png",
