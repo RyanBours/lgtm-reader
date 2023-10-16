@@ -6,7 +6,19 @@
   const entries = readDir("library", {
     recursive: true,
   });
-  console.log(entries);
+
+  let files = [];
+
+  entries.then((entries) => {
+    files = [];
+    const regex = /\.(cbz|cbr)$/;
+    for (const entry of entries) {
+      if (regex.test(entry.path)) {
+        console.log(entry);
+        files.push(entry);
+      }
+    }
+  });
 
   import { watch, watchImmediate } from "tauri-plugin-fs-watch-api";
 
@@ -21,9 +33,11 @@
 </script>
 
 <main class="container">
-  {#each { length: 3 } as _, i}
-    <ThumbnailCard />
-  {/each}
+  <div class="flex flex-wrap">
+    {#each files as file}
+      <ThumbnailCard {file} />
+    {/each}
+  </div>
   <br />
   <Test />
 </main>

@@ -7,7 +7,12 @@ use cbz::{InfoYAML, CBZ};
 
 fn main() {
     tauri::Builder::default()
-        .invoke_handler(tauri::generate_handler![cbz_info, cbz_pages, cbz_page])
+        .invoke_handler(tauri::generate_handler![
+            cbz_info,
+            cbz_pages,
+            cbz_page,
+            cbz_thumbnail
+        ])
         .plugin(tauri_plugin_window_state::Builder::default().build())
         .plugin(tauri_plugin_fs_extra::init())
         .plugin(tauri_plugin_fs_watch::init())
@@ -31,4 +36,10 @@ async fn cbz_pages(file_location: String) -> Vec<String> {
 async fn cbz_page(file_location: String, page: usize) -> String {
     let mut cbz = CBZ::new(file_location);
     cbz.get_image_by_page(page)
+}
+
+#[tauri::command]
+async fn cbz_thumbnail(file_location: String) -> String {
+    let mut cbz = CBZ::new(file_location);
+    cbz.get_thumbnail()
 }

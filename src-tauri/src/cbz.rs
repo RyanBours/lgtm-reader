@@ -18,7 +18,7 @@ pub struct CBZ {
 pub struct InfoYAML {
     Artist: Vec<String>,
     Description: String,
-    // Magazine: Vec<String>,
+    Magazine: Vec<String>,
     Pages: i32,
     Parody: Vec<String>,
     Publisher: Vec<String>,
@@ -89,6 +89,15 @@ impl CBZ {
 
     pub fn get_image_by_page(&mut self, page: usize) -> String {
         let page_name = &self.pages[page];
+        let mut file = self.archive.by_name(page_name).unwrap();
+        let mut contents = vec![];
+        file.read_to_end(&mut contents).unwrap();
+
+        general_purpose::STANDARD.encode(&contents)
+    }
+
+    pub fn get_thumbnail(&mut self) -> String {
+        let page_name = &self.pages[(self.info.Thumbnail - 1) as usize];
         let mut file = self.archive.by_name(page_name).unwrap();
         let mut contents = vec![];
         file.read_to_end(&mut contents).unwrap();
