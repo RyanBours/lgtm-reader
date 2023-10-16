@@ -6,8 +6,9 @@
   const entries = readDir("library", {
     recursive: true,
   });
-  console.log(entries);
+
   let files = [];
+
   entries.then((entries) => {
     files = [];
     const regex = /\.(cbz|cbr)$/;
