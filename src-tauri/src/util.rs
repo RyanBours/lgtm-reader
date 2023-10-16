@@ -17,3 +17,15 @@ pub fn list_all_files(path: &str) -> Vec<String> {
 
     files
 }
+
+pub fn is_valid_cbf_extension(file_name: &str) -> bool {
+    let valid_extensions = vec!["cbz", "zip"];
+    let extension = file_name.split(".").last().unwrap();
+    valid_extensions.contains(&extension)
+}
+
+pub fn is_valid_image_extension(file_name: &str) -> bool {
+    let valid_extensions = vec!["jpg", "jpeg", "png", "gif"];
+    let extension = file_name.split(".").last().unwrap();
+    valid_extensions.contains(&extension)
+}

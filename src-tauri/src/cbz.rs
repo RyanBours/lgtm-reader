@@ -5,6 +5,8 @@ use std::io::BufReader;
 use std::io::Read;
 use zip::ZipArchive;
 
+use crate::util::is_valid_image_extension;
+
 pub struct CBZ {
     archive: ZipArchive<BufReader<fs::File>>,
     pub info: InfoYAML,
@@ -93,16 +95,4 @@ impl CBZ {
 
         general_purpose::STANDARD.encode(&contents)
     }
-}
-
-pub fn is_valid_extension(file_name: &str) -> bool {
-    let valid_extensions = vec!["cbz", "zip"];
-    let extension = file_name.split(".").last().unwrap();
-    valid_extensions.contains(&extension)
-}
-
-pub fn is_valid_image_extension(file_name: &str) -> bool {
-    let valid_extensions = vec!["jpg", "jpeg", "png", "gif"];
-    let extension = file_name.split(".").last().unwrap();
-    valid_extensions.contains(&extension)
 }
