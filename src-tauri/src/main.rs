@@ -3,6 +3,7 @@
 
 mod cbz;
 mod util;
+
 use cbz::{InfoYAML, CBZ};
 
 fn main() {
