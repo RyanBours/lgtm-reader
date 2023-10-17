@@ -12,6 +12,7 @@ fn main() {
             cbz_info,
             cbz_pages,
             cbz_page,
+            cbz_page_images,
             cbz_thumbnail
         ])
         .plugin(tauri_plugin_window_state::Builder::default().build())
@@ -37,6 +38,12 @@ async fn cbz_pages(file_location: String) -> Vec<String> {
 async fn cbz_page(file_location: String, page: usize) -> String {
     let mut cbz = CBZ::new(file_location);
     cbz.get_image_by_page(page)
+}
+
+#[tauri::command]
+async fn cbz_page_images(file_location: String) -> Vec<String> {
+    let mut cbz = CBZ::new(file_location);
+    cbz.get_pages_images()
 }
 
 #[tauri::command]

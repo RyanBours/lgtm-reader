@@ -8,11 +8,24 @@ export function load({ params }) {
             // TEMP: hardcoded path
             fileLocation: 'F:/projects/lgtm-reader/src-tauri/library/' + decodeURI(params.slug)
         });
-        console.log(res);
         return res;
     };
 
-    return fetchContent();
+    const fetchThumbnail = async () => {
+        const res = await invoke('cbz_thumbnail', {
+            fileLocation: 'F:/projects/lgtm-reader/src-tauri/library/' + decodeURI(params.slug)
+        });
+        return 'data:image/png;base64,' + res;
+    };
+
+    const fetchPages = async () => {
+        const res = await invoke('cbz_page_images', {
+            fileLocation: 'F:/projects/lgtm-reader/src-tauri/library/' + decodeURI(params.slug)
+        });
+        return res;
+    }
+
+    return { info: fetchContent(), thumbnail: fetchThumbnail(), pages: fetchPages() };
 
     // throw error(404, 'Not found');
 }

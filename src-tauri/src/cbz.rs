@@ -87,6 +87,33 @@ impl CBZ {
         pages
     }
 
+    pub fn get_pages_images(&mut self) -> Vec<String> {
+        let mut pages: Vec<String> = vec![];
+        let mut contents = vec![];
+
+        for i in 0..self.archive.len() {
+            let mut file = self.archive.by_index(i).unwrap();
+            let outpath = match file.enclosed_name() {
+                Some(path) => path,
+                None => {
+                    println!("Entry {} has a suspicious path", file.name());
+                    continue;
+                }
+            };
+
+            let page_name = outpath.display().to_string();
+
+            if is_valid_image_extension(&page_name) {
+                contents.clear();
+                file.read_to_end(&mut contents).unwrap();
+                let encoded = general_purpose::STANDARD.encode(&contents);
+                pages.push(encoded);
+            }
+        }
+
+        pages
+    }
+
     pub fn get_image_by_page(&mut self, page: usize) -> String {
         let page_name = &self.pages[page];
         let mut file = self.archive.by_name(page_name).unwrap();

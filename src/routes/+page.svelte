@@ -1,7 +1,6 @@
 <script lang="ts">
 	import Test from '$lib/test.svelte';
 	import ThumbnailCard from '$lib/thumbnail-card.svelte';
-	import { onMount } from 'svelte';
 	import { readDir } from '@tauri-apps/api/fs';
 
 	let files = [];
