@@ -19,7 +19,7 @@
 </div>
 <div class="flex flex-wrap">
 	{#each pages as page}
-		<a href={location + '/01.png'}>
+		<a href={location.href + '/01.png'} target="_self">
 			<img class="max-w-[10rem] m-1 aspect-auto" src={'data:image/png;base64,' + page} alt="" />
 		</a>
 	{/each}
