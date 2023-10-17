@@ -1,5 +1,4 @@
 <script lang="ts">
-	import Test from '$lib/test.svelte';
 	import ThumbnailCard from '$lib/thumbnail-card.svelte';
 	import { readDir } from '@tauri-apps/api/fs';
 
@@ -36,6 +35,4 @@
 			<p>No files found</p>
 		{/each}
 	</div>
-	<br />
-	<Test />
 </main>
